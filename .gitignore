@@ -24,6 +24,19 @@
 .DS_Store
 *.pem
 
+# os / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+*.swp
+
+# crash dumps (e.g. zsh.exe.stackdump on Windows/Git Bash)
+*.stackdump
+
+# superseded internal planning doc (project pivoted to the KVT portfolio)
+STORYTELLING_HERO_EXECUTION_PLAN.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*

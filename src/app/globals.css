@@ -1,17 +1,33 @@
+/* globals.css
+   Style global aplikasi: import Tailwind, variabel warna tema (light/dark),
+   font dasar body, dan keyframes partikel untuk atmosfer Project 01.
+   Catatan: CSS memakai gaya komentar blok, bukan garis miring ganda. */
+
 @import "tailwindcss";
 
+/* Variabel warna default (tema terang). */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* Daftarkan variabel ke Tailwind + set Poppins sebagai font sans utama.
+   Token kvt-* adalah palet brand Kawanua Virtual Teknologi: biru bersih di atas
+   latar terang. Dipakai lewat utility seperti text-kvt-ink / bg-kvt-mist. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+
+  --color-kvt-ink: #0b1b33; /* teks utama / headline */
+  --color-kvt-muted: #52637e; /* teks pendukung */
+  --color-kvt-blue: #1e6fd9; /* aksen brand utama */
+  --color-kvt-blue-deep: #0b4ea2; /* aksen gelap (hover) */
+  --color-kvt-mist: #eaf1fb; /* latar terang kebiruan */
+  --color-kvt-line: #c9d9ef; /* garis pemisah halus */
 }
 
+/* Override warna saat perangkat memakai tema gelap. */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +35,87 @@
   }
 }
 
+/* SATU latar untuk seluruh situs: gradient biru-putih yang DIPASANG TETAP ke
+   viewport (background-attachment: fixed). Karena ukurannya mengikuti layar
+   (bukan tinggi halaman), setiap section di bawah Hero menampilkan gradient
+   biru-putih yang sama persis — tidak ada section yang jadi "putih polos" di
+   atas dan baru biru di bawah, dan tidak ada garis batas antar-section.
+   Section-section itu sendiri transparan (lihat masing-masing komponen);
+   Hero menimpanya dengan HeroBackground-nya sendiri. Warnanya sengaja ditetapkan
+   eksplisit (bukan var(--background)) supaya tidak ikut berubah gelap di
+   perangkat bertema gelap — situs ini memang bertema terang sepenuhnya. */
 body {
-  background: var(--background);
+  background: linear-gradient(180deg, #eff5ff 0%, #e4f0fc 100%);
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+  /* Cegah geser horizontal bila ada elemen dekoratif yang sedikit meluber.
+     Pakai `clip`, BUKAN `hidden`: `hidden` mengubah elemen jadi scroll
+     container tersendiri, yang bisa mengacaukan posisi scroll awal halaman
+     dan lompatan tautan anchor. `clip` hanya memotong, tanpa efek samping itu. */
+  overflow-x: clip;
+}
+
+/* Scroll halus untuk tautan jangkar (#home, #about, #project, #recognition) —
+   dipakai navbar Hero & Footer. overflow-x:hidden juga di sini sebagai jaring
+   pengaman kedua terhadap geser horizontal.
+   Gradient yang SAMA juga dipasang di html (elemen root/kanvas): saat overscroll
+   "bounce" di atas/bawah, area di luar dokumen yang tampil adalah latar root —
+   tanpa ini ia kosong dan terlihat sebagai celah hitam. overscroll-behavior:none
+   sekaligus mematikan efek bounce-nya. */
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  overscroll-behavior: none;
+  background: linear-gradient(180deg, #eff5ff 0%, #e4f0fc 100%);
+  background-attachment: fixed;
+}
+
+/* Sembunyikan scrollbar tapi tetap bisa di-scroll — dipakai filmstrip galeri
+   About di HP (AboutGalleryMobile.tsx) supaya geser-sampingnya bersih. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Partikel halus Project 01 — hanya animasikan transform + opacity (dikerjakan
+   compositor) agar tetap mulus 60fps. Dipakai di Project1Atmosphere.tsx. */
+@keyframes project1-particle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-140px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Partikel halus di kartu spesial Recognition — sama semangatnya dengan
+   project1-particle di atas, tapi jarak melayangnya lebih pendek karena
+   kartunya jauh lebih kecil daripada section penuh. */
+@keyframes recognition-particle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-40px) scale(0.6);
+    opacity: 0;
+  }
 }

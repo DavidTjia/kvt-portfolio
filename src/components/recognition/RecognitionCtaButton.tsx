@@ -1,0 +1,36 @@
+// RecognitionCtaButton.tsx
+// Tombol pil di penutup Recognition ("Start a Project"). Bahasa interaksinya
+// (warna, bayangan, hover terangkat, kilau) sama persis dengan HeroCtaButton —
+// cuma bentuknya pil (rounded-full) sesuai referensi, bukan rounded-lg.
+
+interface RecognitionCtaButtonProps {
+  label: string;
+  href: string;
+}
+
+export function RecognitionCtaButton({ label, href }: RecognitionCtaButtonProps) {
+  // Link http eksternal (mis. WhatsApp) dibuka di tab baru; anchor "#..." tidak.
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={[
+        "group relative inline-flex w-fit items-center justify-center overflow-hidden rounded-full",
+        "bg-[#2f5680] px-7 py-3 text-sm font-semibold text-white",
+        "shadow-[0_6px_16px_-4px_rgba(11,27,51,0.35),0_2px_5px_-2px_rgba(11,27,51,0.25)]",
+        "transition-[transform,background-color,box-shadow] duration-300 ease-out",
+        "hover:-translate-y-0.5 hover:bg-[#1b3a5c]",
+        "hover:shadow-[0_12px_24px_-6px_rgba(11,27,51,0.45),0_4px_8px_-3px_rgba(11,27,51,0.3)]",
+        "active:translate-y-0 active:shadow-[0_4px_10px_-4px_rgba(11,27,51,0.35)]",
+      ].join(" ")}
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+      />
+      <span className="relative">{label}</span>
+    </a>
+  );
+}
