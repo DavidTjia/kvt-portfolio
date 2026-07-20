@@ -10,8 +10,9 @@
 "use client"; // memakai motion value + event mouse → harus client component.
 
 import { useCallback } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { HeroBackground } from "./HeroBackground";
+import { HeroEnergyPaths } from "./HeroEnergyPaths";
 import { HeroMascot } from "./HeroMascot";
 import { HeroCtaButton } from "./HeroCtaButton";
 import { HeroServicesBar } from "./HeroServicesBar";
@@ -54,6 +55,21 @@ export function HeroSection() {
   const tiltX = useSpring(pointerX, { stiffness: 120, damping: 20, mass: 0.4 });
   const tiltY = useSpring(pointerY, { stiffness: 120, damping: 20, mass: 0.4 });
 
+  // Spring KEDUA dari pointer yang sama, sengaja jauh lebih lembut & lamban
+  // (stiffness kecil, mass besar) — dipakai khusus untuk parallax. Tilt maskot
+  // boleh responsif, tapi geseran latar harus terasa mengambang, bukan
+  // mengikuti kursor persis.
+  const driftX = useSpring(pointerX, { stiffness: 34, damping: 26, mass: 0.9 });
+  const driftY = useSpring(pointerY, { stiffness: 34, damping: 26, mass: 0.9 });
+
+  // Tiga kedalaman parallax: latar 2px, jalur energi 5px (di dalam
+  // HeroEnergyPaths), maskot 10px. Semua bergerak BERLAWANAN arah kursor —
+  // makin dekat ke penonton, makin besar geserannya.
+  const bgX = useTransform(driftX, [-0.5, 0.5], [2, -2]);
+  const bgY = useTransform(driftY, [-0.5, 0.5], [2, -2]);
+  const mascotX = useTransform(driftX, [-0.5, 0.5], [10, -10]);
+  const mascotY = useTransform(driftY, [-0.5, 0.5], [10, -10]);
+
   // Simpan posisi kursor, dinormalkan ke -0.5..0.5 relatif terhadap section.
   const handlePointerMove = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -78,8 +94,20 @@ export function HeroSection() {
       onMouseMove={handlePointerMove}
       onMouseLeave={resetPointer}
     >
-      {/* Latar berlapis: gradasi, cahaya biru, garis diagonal, vignette. */}
-      <HeroBackground />
+      {/* Latar berlapis: gradasi, cahaya biru, garis diagonal, vignette.
+          Dibungkus node parallax tersendiri (2px, lapisan paling "jauh").
+          -inset-1 memberi 4px kelebihan di tiap sisi supaya geseran 2px tidak
+          pernah menyingkap celah kosong di tepi section. */}
+      <motion.div className="absolute -inset-1 overflow-hidden" style={{ x: bgX, y: bgY }}>
+        <HeroBackground />
+      </motion.div>
+
+      {/* Jalur energi digital: garis patah 45°/90° yang nyaris tak terlihat,
+          sesekali dilewati pulsa cahaya cyan. Dirender SESUDAH HeroBackground
+          (jadi di atasnya) tapi tanpa z-index → tetap di bawah maskot (z-10),
+          scrim (z-15), teks (z-20), dan navbar. Parallax 5px-nya diurus di
+          dalam komponen. */}
+      <HeroEnergyPaths parallaxX={driftX} parallaxY={driftY} />
 
       {/* ---------- Lapisan maskot ----------
           Posisi kepala (setelah geser naik 80px lewat `bottom`) sudah dinilai
@@ -90,21 +118,27 @@ export function HeroSection() {
           kenapa pergeseran `bottom` ini tetap aman dari celah kosong).
           lg:left-[10%] tetap menjaga bahu/mantel bersih dari headline kiri. */}
       <div className="pointer-events-none absolute inset-x-0 bottom-[calc(-13dvh+116px)] z-10 flex justify-center sm:bottom-[calc(-13dvh+80px)] lg:left-[10%]">
-        {/* Maskot masuk dengan fade + naik + sedikit zoom. Ini node terpisah
-            dari tilt/float di dalam HeroMascot (transform induk vs anak tidak
-            saling rebutan). delay 0.5s → muncul setelah headline (giliran foto). */}
-        <motion.div
-          className="relative h-[111dvh] w-[76dvh] max-w-[92vw]"
-          initial={{ opacity: 0, y: 48, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1, ease: ENTER_EASE, delay: 0.5 }}
-        >
-          <HeroMascot
-            src={MASCOT.image}
-            alt={MASCOT.name}
-            tiltX={tiltX}
-            tiltY={tiltY}
-          />
+        {/* Node parallax maskot (10px — geseran terbesar, jadi terbaca sebagai
+            lapisan paling DEKAT ke penonton). Sengaja node sendiri: transform
+            entrance di anaknya dan tilt/float di dalam HeroMascot masing-masing
+            sudah memegang transform-nya sendiri. */}
+        <motion.div style={{ x: mascotX, y: mascotY }}>
+          {/* Maskot masuk dengan fade + naik + sedikit zoom. Ini node terpisah
+              dari tilt/float di dalam HeroMascot (transform induk vs anak tidak
+              saling rebutan). delay 0.5s → muncul setelah headline (giliran foto). */}
+          <motion.div
+            className="relative h-[111dvh] w-[76dvh] max-w-[92vw]"
+            initial={{ opacity: 0, y: 48, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, ease: ENTER_EASE, delay: 0.5 }}
+          >
+            <HeroMascot
+              src={MASCOT.image}
+              alt={MASCOT.name}
+              tiltX={tiltX}
+              tiltY={tiltY}
+            />
+          </motion.div>
         </motion.div>
       </div>
 
