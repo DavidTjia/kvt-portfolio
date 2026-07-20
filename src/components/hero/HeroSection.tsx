@@ -77,7 +77,7 @@ export function HeroSection() {
       pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
       pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
     },
-    [pointerX, pointerY]
+    [pointerX, pointerY],
   );
 
   // Saat kursor keluar, kembalikan maskot ke posisi tegak (tanpa tilt).
@@ -98,7 +98,10 @@ export function HeroSection() {
           Dibungkus node parallax tersendiri (2px, lapisan paling "jauh").
           -inset-1 memberi 4px kelebihan di tiap sisi supaya geseran 2px tidak
           pernah menyingkap celah kosong di tepi section. */}
-      <motion.div className="absolute -inset-1 overflow-hidden" style={{ x: bgX, y: bgY }}>
+      <motion.div
+        className="absolute -inset-1 overflow-hidden"
+        style={{ x: bgX, y: bgY }}
+      >
         <HeroBackground />
       </motion.div>
 
@@ -168,7 +171,9 @@ export function HeroSection() {
       <div className="relative z-20 flex-1">
         {/* Headline + CTA di kiri. Headline giliran ke-2 (setelah navbar,
             sebelum maskot); CTA giliran ke-4 (setelah maskot). */}
-        <div className={`absolute top-[26%] w-full -mt-9.5 -translate-y-1/2 sm:top-[36%] sm:mt-0 ${EDGE}`}>
+        <div
+          className={`absolute top-[26%] w-full -mt-9.5 -translate-y-1/2 sm:top-[36%] sm:mt-0 ${EDGE}`}
+        >
           <motion.h1
             className="text-4xl font-extrabold leading-[1.16] tracking-[-0.02em] sm:text-5xl"
             {...enter(0.3)}
