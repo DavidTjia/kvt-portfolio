@@ -17,7 +17,7 @@ export const aboutGalleryPhotos: AboutPhoto[] = [
   {
     id: 2,
     alt: "Kawanua Virtual Teknologi — dokumentasi 2",
-    src: "/characters/about2.svg",
+    src: "/characters/about2.png",
     gradient: "linear-gradient(160deg, #0b4ea2 0%, #4a86d4 100%)",
   },
   {
