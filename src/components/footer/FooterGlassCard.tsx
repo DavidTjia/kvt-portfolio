@@ -62,7 +62,7 @@ export function FooterGlassCard() {
         className="relative mt-10 flex flex-col items-center gap-4 border-t border-white/50 pt-6 sm:mt-12 sm:flex-row sm:justify-between sm:pt-8"
       >
         <p className="text-xs text-kvt-muted sm:text-sm">
-          © 2026 Kawanua Virtual Teknologi. All rights reserved.
+          © 2026 Kawanua Virtual Teknologi. All rights reserved
         </p>
 
         {/* Kembali ke atas: scroll halus ke #home (id ada di HeroSection). */}

@@ -141,7 +141,7 @@ export function HeroSection() {
           >
             Innovative Solutions
             <br />
-            <span className="text-kvt-blue">Trusted</span> Results.
+            <span className="text-kvt-blue">Trusted</span> Results
           </motion.h1>
           {/* CTA desktop: tepat di bawah headline. Di HP disembunyikan —
               versinya dipindah ke dekat bawah (lihat blok sm:hidden di bawah). */}
@@ -169,7 +169,7 @@ export function HeroSection() {
         >
           Every great technology
           <br />
-          begins with a single idea.
+          begins with a single idea
         </motion.p>
 
         {/* Keterangan kecil di dasar area, mengapit maskot kiri dan kanan.

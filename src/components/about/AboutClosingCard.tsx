@@ -19,7 +19,7 @@ export function AboutClosingCard() {
       {/* HP: text-sm agar cukup 2 baris. Laptop: whitespace-nowrap mengunci
           jadi tepat 1 baris (ruangnya sudah cukup berkat lg:max-w-4xl). */}
       <p className="text-balance text-xs font-bold leading-snug text-kvt-ink sm:text-base lg:text-lg lg:whitespace-nowrap">
-        From here, the story keeps building, and there&apos;s more to see.
+        From here, the story keeps building, and there&apos;s more to see
       </p>
     </motion.div>
   );

@@ -13,7 +13,7 @@ export const projects: ProjectShowcase[] = [
     index: "02",
     name: "Nusa Space",
     description:
-      "Interactive Learning Nusa Space is a 3D educational simulation that guides users through space exploration—from launch to the International Space Station. Available for PC and VR, it combines immersive navigation, object inspection, and interactive quizzes to create an engaging learning experience.",
+      "Interactive Learning Nusa Space is a 3D educational simulation that guides users through space exploration—from launch to the International Space Station. Available for PC and VR, it combines immersive navigation, object inspection, and interactive quizzes to create an engaging learning experience",
     images: ["/characters/Nusa.png"],
     infoTitle: "Mission Info",
     infoFields: [
@@ -26,7 +26,7 @@ export const projects: ProjectShowcase[] = [
     index: "03",
     name: "Manguni Squad",
     description:
-      "Manguni Squad is a first-person shooter mobile game inspired by Indonesian heritage. Players follow Toar, a former professional gamer turned police recruit, through tactical missions across iconic Indonesian locations.",
+      "Manguni Squad is a first-person shooter mobile game inspired by Indonesian heritage. Players follow Toar, a former professional gamer turned police recruit, through tactical missions across iconic Indonesian locations",
     images: ["/characters/manguniSquad.png"],
     infoTitle: "Game Info",
     infoFields: [

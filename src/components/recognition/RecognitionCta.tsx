@@ -19,10 +19,10 @@ export function RecognitionCta() {
       <h2 className="text-3xl font-extrabold leading-[1.16] tracking-[-0.02em] text-kvt-ink sm:text-4xl lg:text-5xl">
         Let&apos;s Build Your
         <br />
-        Next Innovation.
+        Next Innovation
       </h2>
       <p className="max-w-md text-sm text-kvt-muted sm:text-base">
-        Every great product starts with an idea. Let&apos;s turn yours into reality.
+        Every great product starts with an idea. Let&apos;s turn yours into reality
       </p>
       {/* Diarahkan langsung ke WhatsApp (kontak yang sama dengan pill di footer)
           — sebelumnya "#contact" yang tidak menuju ke mana pun. */}

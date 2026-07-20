@@ -140,7 +140,7 @@ function cardTransition(isActive: boolean) {
 // Paragraf tetap di kolom kiri (sama untuk semua karakter — bukan lagi teks
 // per-karakter). Menjelaskan project "Wardeka Edonisia" secara singkat.
 const PROJECT_BLURB =
-  "Wardeka Edonisia is Indonesia's first nationally developed eSports shooter, inspired by Indonesian identity and powered by our in-house cloud infrastructure, Delta Garuda. It has been featured in Piala Presiden Esports 2024 and PORPROV XII North Sulawesi 2025.";
+  "Wardeka Edonisia is Indonesia's first nationally developed eSports shooter, inspired by Indonesian identity and powered by our in-house cloud infrastructure, Delta Garuda. It has been featured in Piala Presiden Esports 2024 and PORPROV XII North Sulawesi 2025";
 
 // Komponen utama carousel.
 export function Project1Carousel() {

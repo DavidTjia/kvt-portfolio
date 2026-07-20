@@ -96,7 +96,7 @@ export function FooterBrand() {
       {/* Tagline brand singkat — mengisi kolom kiri & memberi konteks studio. */}
       <p className="max-w-xs text-sm leading-relaxed text-kvt-muted">
         Crafting immersive digital experiences and homegrown technology from
-        Manado to the world.
+        Manado to the world
       </p>
 
       {/* Alamat dengan ikon pin sejajar baris pertama. */}
