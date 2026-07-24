@@ -1,11 +1,3 @@
-// ProjectInfoCard.tsx
-// Kartu kaca (glass morphism) mengambang di sudut galeri gambar, dipakai oleh
-// Project 02 & Project 03. Sengaja terpisah dari Project1InfoCard (bukan
-// dipakai bersama) karena Project 01 tidak boleh disentuh sama sekali —
-// field-nya juga lebih umum (label/value bebas, bukan name/faction tetap).
-// Hanya dirender saat kursor mendekati gambar; parent yang mengatur mount
-// lewat AnimatePresence supaya animasi keluar tetap jalan.
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -14,7 +6,7 @@ import type { ProjectInfoField } from "@/types/project";
 interface ProjectInfoCardProps {
   title: string;
   fields: ProjectInfoField[];
-  align: "left" | "right"; // sisi galeri tempat kartu mengambang
+  align: "left" | "right";
 }
 
 export function ProjectInfoCard({ title, fields, align }: ProjectInfoCardProps) {
@@ -31,7 +23,6 @@ export function ProjectInfoCard({ title, fields, align }: ProjectInfoCardProps) 
       <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/45">
         {title}
       </span>
-
       <dl className="mt-3 space-y-2.5">
         {fields.map((field) => (
           <div key={field.label}>

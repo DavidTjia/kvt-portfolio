@@ -1,10 +1,3 @@
-// AboutGalleryMobile.tsx
-// Versi galeri About untuk layar HP (md:hidden): filmstrip horizontal yang
-// bisa digeser (scroll-snap) + titik indikator, menggantikan tumpukan 7 foto
-// satu kolom yang bikin scroll vertikal kepanjangan. Tablet/desktop tetap
-// memakai mosaik AboutGallery (hidden md:grid) — dua komponen terpisah, satu
-// per rentang layar, dipilih lewat kelas visibilitas di AboutSection.
-
 "use client";
 
 import { useCallback, useRef, useState } from "react";
@@ -17,9 +10,6 @@ export function AboutGalleryMobile() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
-  // Titik aktif = foto yang pusatnya paling dekat dengan pusat viewport
-  // scroller. Cara ini tahan terhadap snap-center + "peek" (lebar tiap slide
-  // < 100%) tanpa perlu tahu lebar/gap persisnya.
   const handleScroll = useCallback(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -38,7 +28,6 @@ export function AboutGalleryMobile() {
     setActive(best);
   }, []);
 
-  // Klik titik → geser foto ke-i ke tengah dengan animasi halus.
   const goTo = useCallback((i: number) => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -52,9 +41,6 @@ export function AboutGalleryMobile() {
 
   return (
     <motion.div className="flex flex-col gap-4" {...revealUp()}>
-      {/* Filmstrip: tiap slide 82% lebar (menyisakan "peek" foto berikutnya
-          sebagai isyarat bisa digeser), snap ke tengah. Scrollbar disembunyikan
-          (.no-scrollbar) supaya bersih. px-[9%] memusatkan slide pertama/terakhir. */}
       <div
         ref={scrollerRef}
         onScroll={handleScroll}
@@ -65,7 +51,6 @@ export function AboutGalleryMobile() {
             key={photo.id}
             className="relative aspect-[4/3] w-[82%] shrink-0 snap-center overflow-hidden rounded-[18px] shadow-[0_10px_24px_-14px_rgba(11,27,51,0.22)]"
           >
-            {/* Warna latar sementara di balik foto saat masih dimuat. */}
             <div className="absolute inset-0" style={{ backgroundImage: photo.gradient }} />
             <Image
               src={photo.src}
@@ -79,8 +64,6 @@ export function AboutGalleryMobile() {
           </div>
         ))}
       </div>
-
-      {/* Titik indikator: melebar di foto aktif, bisa diklik untuk lompat. */}
       <div className="flex items-center justify-center gap-2" role="tablist" aria-label="About gallery">
         {aboutGalleryPhotos.map((photo, i) => (
           <button

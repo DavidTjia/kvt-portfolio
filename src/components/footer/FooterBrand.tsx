@@ -1,14 +1,6 @@
-// FooterBrand.tsx
-// Kolom kiri footer: logo, tagline brand singkat, alamat kantor (dengan ikon
-// pin), dan dua pill kontak (telepon & email) yang kini beri­kon. Tidak perlu
-// "use client" — semua interaksi (hover) murni CSS.
-
 import Image from "next/image";
+import { CONTACT_EMAIL, CONTACT_WHATSAPP, mailtoUrl, whatsappUrl } from "@/data/contact";
 
-// Ikon garis sederhana (gaya Feather: stroke, tebal 2, ujung membulat) —
-// konsisten dengan ikon panah yang dipakai di carousel/section lain.
-
-// Ikon telepon.
 function PhoneIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -23,7 +15,6 @@ function PhoneIcon() {
   );
 }
 
-// Ikon amplop/email.
 function MailIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -33,7 +24,6 @@ function MailIcon() {
   );
 }
 
-// Ikon pin lokasi untuk alamat.
 function PinIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-0.5 shrink-0 text-kvt-blue">
@@ -56,8 +46,6 @@ interface ContactPillProps {
   icon: React.ReactNode;
 }
 
-// Pill kontak (WhatsApp/email): ikon + label + nilai, hover terisi biru.
-// Link http eksternal (mis. WhatsApp) dibuka di tab baru; mailto/tel tidak.
 function ContactPill({ label, value, href, icon }: ContactPillProps) {
   const external = href.startsWith("http");
   return (
@@ -78,28 +66,22 @@ function ContactPill({ label, value, href, icon }: ContactPillProps) {
   );
 }
 
-// Kolom kiri footer: logo, tagline, alamat, dua pill kontak.
 export function FooterBrand() {
   return (
     <div className="flex flex-col items-center gap-5 sm:items-start">
-      {/* Logo. Kotak tetap + object-contain, sama seperti HeroNavbar.tsx. */}
       <div className="relative h-9 w-30 sm:h-10 sm:w-33.75">
         <Image
-          src="/characters/kvtLogo.png"
+          src="/brand/kvt-logo.png"
           alt="Kawanua Virtual Teknologi"
           fill
           className="object-contain object-left"
           sizes="135px"
         />
       </div>
-
-      {/* Tagline brand singkat — mengisi kolom kiri & memberi konteks studio. */}
       <p className="max-w-xs text-sm leading-relaxed text-kvt-muted">
         Crafting immersive digital experiences and homegrown technology from
         Manado to the world
       </p>
-
-      {/* Alamat dengan ikon pin sejajar baris pertama. */}
       <div className="flex items-start gap-2.5 text-sm leading-relaxed text-kvt-muted">
         <PinIcon />
         <div className="flex flex-col gap-2.5">
@@ -118,18 +100,17 @@ export function FooterBrand() {
           </p>
         </div>
       </div>
-
       <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
         <ContactPill
           label="WhatsApp"
-          value="(+62) 878 1940 9980"
-          href="https://wa.me/6287819409980"
+          value={CONTACT_WHATSAPP.display}
+          href={whatsappUrl()}
           icon={<PhoneIcon />}
         />
         <ContactPill
           label="Email"
-          value="admin@bigdade.id"
-          href="mailto:admin@bigdade.id"
+          value={CONTACT_EMAIL}
+          href={mailtoUrl()}
           icon={<MailIcon />}
         />
       </div>

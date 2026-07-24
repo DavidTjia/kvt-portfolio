@@ -1,15 +1,9 @@
-// RecognitionCtaButton.tsx
-// Tombol pil di penutup Recognition ("Start a Project"). Bahasa interaksinya
-// (warna, bayangan, hover terangkat, kilau) sama persis dengan HeroCtaButton —
-// cuma bentuknya pil (rounded-full) sesuai referensi, bukan rounded-lg.
-
 interface RecognitionCtaButtonProps {
   label: string;
   href: string;
 }
 
 export function RecognitionCtaButton({ label, href }: RecognitionCtaButtonProps) {
-  // Link http eksternal (mis. WhatsApp) dibuka di tab baru; anchor "#..." tidak.
   const external = href.startsWith("http");
   return (
     <a
