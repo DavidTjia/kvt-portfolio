@@ -1,11 +1,3 @@
-// ProjectGalleryCarousel.tsx
-// Carousel gambar kecil untuk kartu Project 02/03 (bukan carousel karakter
-// layar-penuh seperti Project 01 — ini galeri di dalam frame). Mendukung
-// berapa pun jumlah gambar di `images`; kalau baru satu gambar, tombol
-// navigasi & pagination otomatis disembunyikan (tidak ada gunanya).
-// Autoplay TIDAK berhenti saat hover — pelajaran dari Project 01: pause-on-hover
-// terasa seperti bug, bukan fitur.
-
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
@@ -22,7 +14,7 @@ interface ProjectGalleryCarouselProps {
   alt: string;
   infoTitle: string;
   infoFields: ProjectInfoField[];
-  infoAlign: "left" | "right"; // sisi tempat kartu info mengambang
+  infoAlign: "left" | "right";
 }
 
 export function ProjectGalleryCarousel({
@@ -35,18 +27,16 @@ export function ProjectGalleryCarousel({
   const total = images.length;
   const [index, setIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  // Layar sentuh (tanpa hover): kartu info dibuka lewat TAP, bukan hover.
+
   const [canHover, setCanHover] = useState(true);
   useEffect(() => {
     setCanHover(window.matchMedia("(hover: hover)").matches);
   }, []);
 
-  // Pindah ke gambar ke-i (index dibungkus agar tidak keluar rentang).
   const goTo = useCallback((i: number) => setIndex(((i % total) + total) % total), [total]);
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
 
-  // Autoplay selalu jalan (di-reset tiap slide berubah), sama seperti Project 01.
   useEffect(() => {
     if (total <= 1) return;
     const id = window.setInterval(() => setIndex((i) => (i + 1) % total), AUTOPLAY_INTERVAL);
@@ -58,10 +48,9 @@ export function ProjectGalleryCarousel({
       className="relative"
       onMouseEnter={() => canHover && setIsHovered(true)}
       onMouseLeave={() => canHover && setIsHovered(false)}
-      // Di layar sentuh: tap galeri untuk buka/tutup kartu info.
+
       onClick={() => !canHover && setIsHovered((v) => !v)}
     >
-      {/* Frame galeri: sudut membulat, border tipis, bayangan lembut. */}
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl">
         <AnimatePresence mode="wait">
           <motion.div
@@ -107,9 +96,6 @@ export function ProjectGalleryCarousel({
           </>
         )}
       </div>
-
-      {/* Kartu info: hanya saat kursor dekat galeri, tetap di dalam padding
-          kartu induk (offset kecil) supaya tidak terpotong clip-path sudut. */}
       <AnimatePresence>
         {isHovered && (
           <ProjectInfoCard key="info" title={infoTitle} fields={infoFields} align={infoAlign} />

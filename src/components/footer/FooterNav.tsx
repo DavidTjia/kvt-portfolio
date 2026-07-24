@@ -1,16 +1,8 @@
-// FooterNav.tsx
-// Kolom kanan footer: heading "Navigation" + tautan yang scroll halus ke tiap
-// section (id ditambahkan di Hero/About/Projects; Recognition sudah punya
-// id="recognition" — lihat globals.css untuk scroll-behavior), lalu blok
-// "Connect" berisi ikon sosial. Garis bawah biru + translateX kecil saat
-// hover pada tautan; ikon sosial memakai treatment hover yang sama dengan
-// pill kontak (border biru → terisi biru, ikon putih). Murni CSS.
-
 const LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Project", href: "#project" },
-  { label: "Recognitions", href: "#recognition" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Project", href: "/#project" },
+  { label: "Recognitions", href: "/#recognition" },
 ];
 
 const SOCIALS = [
@@ -71,7 +63,6 @@ export function FooterNav() {
           ))}
         </ul>
       </div>
-
       <div className="flex flex-col items-center gap-4 sm:items-end">
         <span className="text-xs font-semibold uppercase tracking-[0.28em] text-kvt-muted">
           Connect

@@ -1,22 +1,6 @@
-// FooterGlassCard.tsx
-// Kartu kaca (glass morphism) besar yang membungkus seluruh isi footer.
-// SATU trigger scroll-reveal di kartu ini (fade-up, 0.8s) yang lewat Framer
-// variants juga mengorkestrasi stagger anak-anaknya (kolom kiri, kolom
-// kanan, divider+copyright) — bukan tiga observer viewport terpisah, supaya
-// timingnya selalu selaras: anak mulai muncul saat kartu hampir selesai naik
-// (delayChildren), bukan berbarengan persis dengan animasi kartu itu sendiri.
-//
-// Supaya efek kacanya benar-benar terbaca (bukan cuma kotak putih transparan
-// datar), tiga hal ditambahkan di atas resep dasar backdrop-blur+bg putih:
-// 1) backdrop-saturate supaya warna yang di-blur di baliknya (lihat glow di
-//    FooterSection.tsx) ikut lebih hidup saat "tembus" ke kartu.
-// 2) sheen diagonal tipis (putih→transparan) di lapisan dalam, meniru cahaya
-//    yang jatuh di permukaan kaca.
-// 3) inset highlight 1px di tepi atas (box-shadow inset), meniru pantulan
-//    cahaya di bibir kaca — detail kecil yang sangat menjual kesan "kaca".
-
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FooterBrand } from "./FooterBrand";
 import { FooterNav } from "./FooterNav";
@@ -43,11 +27,9 @@ export function FooterGlassCard() {
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.25 }}
+      viewport={{ once: true, amount: 0.25 }}
     >
-      {/* Sheen: cahaya diagonal tipis di permukaan kaca, di bawah konten. */}
       <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/50 via-white/5 to-transparent" />
-
       <div className="relative grid grid-cols-1 gap-10 text-center sm:grid-cols-2 sm:gap-8 sm:text-left lg:gap-16">
         <motion.div variants={itemVariants}>
           <FooterBrand />
@@ -56,7 +38,6 @@ export function FooterGlassCard() {
           <FooterNav />
         </motion.div>
       </div>
-
       <motion.div
         variants={itemVariants}
         className="relative mt-10 flex flex-col items-center gap-4 border-t border-white/50 pt-6 sm:mt-12 sm:flex-row sm:justify-between sm:pt-8"
@@ -64,10 +45,8 @@ export function FooterGlassCard() {
         <p className="text-xs text-kvt-muted sm:text-sm">
           © 2026 Kawanua Virtual Teknologi. All rights reserved
         </p>
-
-        {/* Kembali ke atas: scroll halus ke #home (id ada di HeroSection). */}
-        <a
-          href="#home"
+        <Link
+          href="/#home"
           className="group inline-flex items-center gap-2 text-xs font-semibold text-kvt-ink transition-colors duration-300 hover:text-kvt-blue sm:text-sm"
         >
           Back to top
@@ -76,7 +55,7 @@ export function FooterGlassCard() {
               <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
-        </a>
+        </Link>
       </motion.div>
     </motion.div>
   );

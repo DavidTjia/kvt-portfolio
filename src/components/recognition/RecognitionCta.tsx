@@ -1,13 +1,8 @@
-// RecognitionCta.tsx
-// Penutup section Recognition: headline ajakan, subteks singkat, dan tombol
-// "Start a Project" — bagian ini ada di referensi awal tapi belum pernah
-// dibuat sampai sekarang. Fade-up sekali saat masuk viewport, sama seperti
-// pola scroll-reveal lain di situs ini.
-
 "use client";
 
 import { motion } from "framer-motion";
 import { RecognitionCtaButton } from "./RecognitionCtaButton";
+import { whatsappUrl } from "@/data/contact";
 import { revealUp } from "@/lib/motion";
 
 export function RecognitionCta() {
@@ -24,9 +19,7 @@ export function RecognitionCta() {
       <p className="max-w-md text-sm text-kvt-muted sm:text-base">
         Every great product starts with an idea. Let&apos;s turn yours into reality
       </p>
-      {/* Diarahkan langsung ke WhatsApp (kontak yang sama dengan pill di footer)
-          — sebelumnya "#contact" yang tidak menuju ke mana pun. */}
-      <RecognitionCtaButton label="Start a Project" href="https://wa.me/6287819409980" />
+      <RecognitionCtaButton label="Start a Project" href={whatsappUrl()} />
     </motion.div>
   );
 }

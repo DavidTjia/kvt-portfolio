@@ -1,13 +1,7 @@
-// HeroServicesBar.tsx
-// Strip biru gelap di bagian paling bawah Hero, berisi ringkasan layanan studio.
-// Selain menutup layar pertama, strip ini juga menyembunyikan bagian bawah
-// maskot — itulah yang membuat maskot tampak ter-crop rapi seperti di referensi.
-
 interface HeroServicesBarProps {
-  edge: string; // kelas padding tepi, disamakan dengan elemen Hero lainnya
+  edge: string;
 }
 
-// Daftar layanan yang ditampilkan, dipisahkan titik tengah.
 const SERVICES = [
   "Game Development",
   "Interactive App Development",
@@ -23,7 +17,7 @@ export function HeroServicesBar({ edge }: HeroServicesBarProps) {
       >
         {SERVICES.map((service, i) => (
           <span key={service} className="flex items-center gap-3">
-            {/* Pemisah titik tengah, tidak ditampilkan sebelum item pertama. */}
+
             {i > 0 && (
               <span aria-hidden="true" className="text-white/40">
                 ·

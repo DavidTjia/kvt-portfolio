@@ -1,7 +1,3 @@
-// recognitions.ts
-// Daftar penghargaan yang ditampilkan di RecognitionSection, urut sesuai
-// posisi grid (01, 02, lalu kartu spesial mengisi slot ke-3, baru 03-05).
-
 import type { Recognition } from "@/types/recognition";
 
 export const recognitions: Recognition[] = [

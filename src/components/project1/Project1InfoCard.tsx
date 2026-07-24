@@ -1,11 +1,3 @@
-// Project1InfoCard.tsx
-// Kartu kaca (glass morphism) mengambang di dekat bahu karakter, menampilkan
-// nama lengkap dan fraksi. Posisinya tetap (persentase section) terlepas dari
-// pose tiap karakter — cukup umum untuk kelima karakter tanpa perlu koordinat
-// per-karakter. HANYA dirender saat kursor mendekati karakter — lihat state
-// `isCharacterHovered` di Project1Carousel.tsx yang mengontrol mount/unmount-nya
-// lewat AnimatePresence, sehingga transisi masuk/keluar di bawah tetap berjalan.
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -27,7 +19,6 @@ export function Project1InfoCard({ fullName, faction }: Project1InfoCardProps) {
       <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/45">
         Character Info
       </span>
-
       <dl className="mt-3 space-y-2.5">
         <div>
           <dt className="text-[10px] font-medium uppercase tracking-wider text-white/40">

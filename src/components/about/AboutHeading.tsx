@@ -1,8 +1,3 @@
-// AboutHeading.tsx
-// Judul besar di bagian atas section About: "Every experience has a story."
-// Muncul dengan animasi fade-up saat pertama kali masuk viewport (sekali saja,
-// tidak berulang tiap kali di-scroll bolak-balik — lihat `viewport.once`).
-
 "use client";
 
 import { motion } from "framer-motion";

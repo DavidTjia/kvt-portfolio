@@ -1,12 +1,3 @@
-// AboutGalleryPhoto.tsx
-// Satu ubin foto di kolase About. Dua state Framer Motion dipakai pada node
-// YANG SAMA (bukan dua node terpisah seperti pola dual-library di Hero) —
-// ini aman karena keduanya berasal dari satu sistem (Framer): `variants`
-// (dikendalikan AboutGallery lewat stagger) mengurus reveal saat scroll,
-// sedangkan `whileHover` mengurus scale + shadow saat kursor di atasnya.
-// Variant "visible" punya `transition` sendiri (lebih lambat, untuk reveal);
-// prop `transition` di root berlaku untuk whileHover (lebih cepat).
-
 "use client";
 
 import { motion, type Variants } from "framer-motion";
@@ -16,7 +7,7 @@ import { REVEAL_EASE } from "@/lib/motion";
 
 interface AboutGalleryPhotoProps {
   photo: AboutPhoto;
-  className: string; // kelas ukuran/posisi grid, ditentukan oleh AboutGallery
+  className: string;
 }
 
 const itemVariants: Variants = {
@@ -41,13 +32,7 @@ export function AboutGalleryPhoto({ photo, className }: AboutGalleryPhotoProps) 
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={`relative overflow-hidden rounded-[18px] ${className}`}
     >
-      {/* Warna latar sementara di balik foto — terlihat sekejap saat foto
-          masih dimuat, supaya ubin tidak berkedip kosong. */}
       <div className="absolute inset-0" style={{ backgroundImage: photo.gradient }} />
-
-      {/* Foto asli. unoptimized: file-nya SVG (berisi gambar ter-embed), jadi
-          dilewatkan apa adanya tanpa optimizer Next (yang menolak SVG kecuali
-          dikonfigurasi khusus). object-cover mengisi ubin penuh di rasio apa pun. */}
       <Image
         src={photo.src}
         alt={photo.alt}

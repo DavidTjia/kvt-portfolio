@@ -1,8 +1,3 @@
-// RecognitionHeading.tsx
-// Judul besar terpusat di atas grid penghargaan. Tipografi sama dengan
-// headline Hero (font-extrabold, tracking rapat) — cuma dipusatkan dan
-// dinaikkan satu tingkat ukuran supaya terasa jadi judul section, bukan hero.
-
 "use client";
 
 import { motion } from "framer-motion";
